@@ -1,1 +1,1 @@
-# projGitTag
+# Basic GO codes.
