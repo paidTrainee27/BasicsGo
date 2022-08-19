@@ -18,11 +18,32 @@ type user struct {
 
 type userMap map[int]user
 
+// arr := [...]int{2, 3, 8, 4} // A Array not a slice
+
 func main() {
 	// appendStructs()
 	// mergeSortedArrays()
 	// sortMap()
 	twoDimensionArray()
+}
+
+func arrayDef() {
+	var (
+		arr  []int               //slice
+		arr1 [5]int              //array
+		arr2 = make([]int, 1, 2) //slice cannot create array
+		arr3 = []int{}
+		arr4 = [4]int{1, 2, 3, 5}
+		arr5 = [...]int{1, 2} //is a array
+	)
+	arr2 = append(arr2, 4)
+	fmt.Println(arr, arr1, arr2, arr3, arr4)
+	arr2 = append(arr2, 1)
+	arr2 = append(arr2, 1, 1, 1, 1)
+	//cap  always  doubles the specified count(third arg) every time length exceeds the capacity.
+	//len is size(first arg in make) + no. of element(append)
+	fmt.Println("Hello World", len(arr2), cap(arr2))
+	fmt.Println(arr5)
 }
 
 func appendStructs() {
@@ -35,7 +56,7 @@ func appendStructs() {
 	slice1 = append(slice1, 8)
 
 	// fmt.Println(array1)
-	// fmt.Println(slice1)
+	fmt.Println(slice1)
 
 	// users = append(users, userMap{1: user{1, "ryaaz"}})
 	// users = append(users, userMap{2: user{2, "faraz"}})
@@ -43,7 +64,7 @@ func appendStructs() {
 	// users = append(users, userMap{4: user{4, "arbaaz"}})
 
 	for _, user := range users {
-		fmt.Println(fmt.Sprintf("students %v", user))
+		fmt.Printf("students %v\n", user)
 	}
 }
 
@@ -125,7 +146,6 @@ func unshift() []int {
 	return append([]int{v}, a...)
 }
 
-
 func filterInPlace() []int {
 	a := []int{1, 2, 3, 4, 5}
 
@@ -156,14 +176,40 @@ func copySliceV1() []int {
 	return b
 }
 
-
-func twoDimensionArray()  {
+func twoDimensionArray() {
 	var twoDArray [3][3]int
 
 	for i := 0; i < 3; i++ {
 		for j := 0; j < 3; j++ {
-			twoDArray[j][i] = i+j
+			twoDArray[j][i] = i + j
 		}
 	}
 	fmt.Println(twoDArray)
+}
+
+type ServicePay struct {
+	Name    string
+	Payment int
+}
+
+var ServicePayList []ServicePay
+
+func SortSliceOfStruct() {
+	sp1 := ServicePay{
+		Name:    "amaey",
+		Payment: 43,
+	}
+	sp2 := ServicePay{
+		Name:    "atul",
+		Payment: 114,
+	}
+	sp3 := ServicePay{
+		Name:    "ravi",
+		Payment: 12,
+	}
+	ServicePayList = []ServicePay{sp1, sp2, sp3}
+	sort.Slice(ServicePayList, comparePrice)
+}
+func comparePrice(i, j int) bool {
+	return ServicePayList[i].Payment < ServicePayList[j].Payment
 }

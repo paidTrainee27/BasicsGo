@@ -5,12 +5,12 @@ import (
 	"time"
 )
 
-var weekday string
-var timeFormat string
-var cYear int
-var cMonth time.Month
-var cDate, cHour, cMin, cSec, cNanoSec int
-var localTime time.Location
+var (
+	weekday, timeFormat                       string
+	cMonth                                    time.Month
+	cYear, cDate, cHour, cMin, cSec, cNanoSec int
+	localTime                                 time.Location
+)
 
 func init() {
 	weekday = time.Now().Weekday().String()
@@ -24,6 +24,15 @@ func init() {
 	cSec = 54
 	cNanoSec = 100
 	localTime = *time.Local
+}
+
+func workingDays() {
+	switch time.Now().Weekday() {
+	case time.Saturday, time.Sunday:
+		fmt.Println("Its a weekEND")
+	default:
+		fmt.Println("its a not a weekEND")
+	}
 }
 
 func main() {
@@ -100,7 +109,7 @@ func addSubTime() {
 	nextDay := 24 * time.Hour
 	theTime.Add(nextDay)
 
-	previousDay := -24 *time.Hour
+	previousDay := -24 * time.Hour
 	theTime.Add(previousDay)
 
 }

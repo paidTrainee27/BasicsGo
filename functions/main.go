@@ -33,6 +33,7 @@ func callMee(t ...interface{}) {
 	// fmt.Println(t)
 }
 
+//Variadic function 
 func callInt(i ...int) {
 	fmt.Println(i)
 }
@@ -46,7 +47,7 @@ func checkOrder() {
 	_ = join(",", names...)
 }
 
-//Note changing the order of arg will give error
+//Note changing the order of arg will give error : variadic args should be in the last
 func join(del string, values ...string) string {
 	var line string
 	for i, v := range values {

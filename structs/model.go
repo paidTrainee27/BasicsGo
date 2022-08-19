@@ -38,3 +38,23 @@ func marshalStruct() {
 
 	fmt.Println(string(out))
 }
+
+
+func marshallingByte(){
+	data := []byte(`{"k1":"val1","k2":4,"k3": ["apples","oranges",34]}`)
+	var dataMap map[string]interface{}
+
+	if err := json.Unmarshal(data,&dataMap);err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(dataMap)
+
+	resp ,err := json.Marshal(dataMap)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Printf("%s",resp)
+}

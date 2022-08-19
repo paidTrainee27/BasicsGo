@@ -2,9 +2,20 @@ package main
 
 import (
 	"fmt"
+	"net"
+	"net/url"
 	"strconv"
 	"strings"
 )
+
+/*
+	A Go string is a read-only slice of bytes.
+	The language and the standard library treat strings specially - as containers of text encoded in UTF-8.
+	In other languages, strings are made of “characters”.
+	In Go, the concept of a character is called a rune -
+	it’s an integer that represents a Unicode code point
+	Go string literals are UTF-8 encoded text.
+*/
 
 // var salutation string = "Hi there !"
 
@@ -108,4 +119,32 @@ func toBytes() {
 	fmt.Println(b)
 
 	fmt.Println(c)
+}
+
+func urlParsing() {
+	s := "postgres://user:pass@host.com:5432/path?k=v#f"
+
+	u, err := url.Parse(s)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(u.Scheme)
+
+	fmt.Println(u.User)
+	fmt.Println(u.User.Username())
+	p, _ := u.User.Password()
+	fmt.Println(p)
+
+	fmt.Println(u.Host)
+	host, port, _ := net.SplitHostPort(u.Host)
+	fmt.Println(host)
+	fmt.Println(port)
+
+	fmt.Println(u.Path)
+	fmt.Println(u.Fragment)
+
+	fmt.Println(u.RawQuery)
+	m, _ := url.ParseQuery(u.RawQuery)
+	fmt.Println(m)
+	fmt.Println(m["k"][0])
 }

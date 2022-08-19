@@ -5,6 +5,7 @@ import (
 	"sort"
 )
 
+//map[key-type]val-type
 var dict1 map[string]int
 
 func main() {
@@ -23,12 +24,10 @@ func declare() {
 	delete(dict, "second")
 
 	//way 2
-	dict1 = map[string]int{
-		"first": 0,
-	}
+	dict1 = map[string]int{"first": 0}
 
-	fmt.Println(fmt.Sprintf("%v", dict))
-	fmt.Println(fmt.Sprintf("%v", dict1))
+	fmt.Printf("%v", dict)
+	fmt.Printf("%v", dict1)
 }
 
 func compute1() {
@@ -39,6 +38,7 @@ func compute1() {
 	dict["third"] = 3
 
 	el := dict["first"]
+
 	if el > 10 {
 		fmt.Println("> 10")
 	} else {
