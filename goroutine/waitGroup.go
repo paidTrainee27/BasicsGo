@@ -5,6 +5,11 @@ import (
 	"sync"
 )
 
+/*
+It is important to pass the pointer of wg in line no. 21. If the pointer is not passed, then each Goroutine
+will have its own copy of the WaitGroup and main will not be notified when they finish executing.
+*/
+
 func callLock() {
 	i := 0
 	var wg sync.WaitGroup
