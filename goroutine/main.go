@@ -75,6 +75,7 @@ func shipOrders(out chan string) {
 }
 
 func makePayments(out chan string) {
+	time.Sleep(time.Second * 1)
 	defer close(out)
 
 	for i := 0; i < 5; i++ {

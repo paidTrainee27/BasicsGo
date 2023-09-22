@@ -127,7 +127,7 @@ func push() []int {
 	return append(a, v)
 }
 
-// Removing a element from the end of array
+// Removing a element from the end of array and returning that elem and slice
 func pop() (int, []int) {
 	a := []int{1, 2, 3, 4, 5}
 	return a[len(a)-1], a[:len(a)-1] //the element and atray

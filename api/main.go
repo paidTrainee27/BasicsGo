@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -111,9 +112,24 @@ func getHttpError(code int, message string) (err Error) {
 	return
 }
 
+type ASlice []string
+
+func (a ASlice) Pop() (s string, err error) {
+	if len(a) <= 0 {
+		return "", errors.New("empty slice")
+	}
+	s = a[len(a)-1]
+	return
+}
+
 func getProductIdFromURL(r *http.Request) (productId int, err error) {
-	params := strings.Split(r.URL.String(), "/")
-	productId, err = strconv.Atoi(params[len(params)-1])
+	var params ASlice = strings.Split(r.URL.String(), "/")
+	id, err := params.Pop()
+	if err != nil {
+		fmt.Println(err)
+		return 0, err
+	}
+	productId, err = strconv.Atoi(id)
 	return
 }
 

@@ -18,15 +18,16 @@ import (
 */
 
 // var salutation string = "Hi there !"
-
 /*WON'T WORK HERE*/
 // salutation  := "Hi there !"
+
+//stirng literals are of two types raw and interpreted
 var backTick = `Say "hello" to Go!
 It's a fast, statically typed,
 compiled language that feels like a dynamically typed,
 interpreted language.`
 
-var stringLitrals = "Say \"hello\" to Go!"
+var stringLitrals = "Say \"hello\" to Go!" //interpreted
 
 func main() {
 	salutation := "Hi there !"

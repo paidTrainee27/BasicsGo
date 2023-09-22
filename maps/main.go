@@ -15,6 +15,36 @@ func main() {
 	checkKey()
 }
 
+func sortWithoutSlice() {
+	m := map[string]int{
+		"bikram": 2,
+		"akash":  10,
+		"vijay":  5,
+		"wasim":  2,
+		"sahil":  2,
+		"umesh":  2,
+	}
+	//to store previous state
+	a := 0
+	b := ""
+l1: //can only be used above and inside loops
+	for v, e := range m {
+		c := v       //store current key ( if want to sort by value then store value)
+		if b == "" { // Initialize
+			a = e
+			b = v
+		} else {
+			if b > c { //compare
+				delete(m, b) // delete
+				m[b] = a     //put at the end of map
+				b = ""       //reset
+				break l1     //break and restart
+			}
+		}
+	}
+	fmt.Println(m)
+}
+
 func declare() {
 	//naive way 1
 	dict := make(map[string]int)

@@ -16,27 +16,28 @@ func callLock() {
 	var m sync.Mutex
 	wg.Add(2)
 	go func(c *int, w *sync.WaitGroup, mut *sync.Mutex) {
-		go incOdd(c, w, mut)
-		go incEven(c, w, mut)
+		go incA(c, w, mut)
+		go incB(c, w, mut)
 	}(&i, &wg, &m)
 	wg.Wait()
 	fmt.Println(i)
 }
 
-func incOdd(inx *int, w *sync.WaitGroup, m *sync.Mutex) {
+func incA(inx *int, w *sync.WaitGroup, m *sync.Mutex) {
 	m.Lock()
 	*inx++
 	m.Unlock()
 	w.Done()
 }
 
-func incEven(inx *int, w *sync.WaitGroup, m *sync.Mutex) {
+func incB(inx *int, w *sync.WaitGroup, m *sync.Mutex) {
 	m.Lock()
 	*inx++
 	m.Unlock()
 	w.Done()
 }
 
+//not necessary to be global
 var x1 = 0
 
 // Without mutex the value of x1 will be random due to race condition
@@ -47,7 +48,7 @@ func inxrement(wg *sync.WaitGroup, m *sync.Mutex) {
 	m.Unlock()
 	wg.Done()
 }
-func DeadLockMutext() {
+func RaceConditionMutext() {
 	var w sync.WaitGroup
 	var m sync.Mutex
 	for i := 0; i < 1000; i++ {

@@ -31,6 +31,10 @@ func (s *student) updateAddress(address address) {
 	s.address = address
 }
 
+func (s student) getAddress() address {
+	return s.address
+}
+
 func main() {
 	// createStruct()
 	// anonymousStruct()
